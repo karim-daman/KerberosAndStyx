@@ -26,7 +26,9 @@
   <Router {routes} />
   <video bind:this={video} id="background-video" onloadstart="this.volume=0.05" autoplay loop>
     <track kind="captions" />
-    <source src={"./Uncloud Rndr Portfolio.mov"} type="video/mp4" />
+    <!-- <source src={"./Uncloud Rndr Portfolio.mov"} type="video/mp4" /> -->
+    <source src={"./source_vp9.webm"} type="video/webm;codec=vp9" />
+    <source src={"./source_264.mp4"} type="video/mp4" />
   </video>
 
   <div id="video-controls">
