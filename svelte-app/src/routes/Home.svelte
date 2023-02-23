@@ -1,4 +1,4 @@
-<h1>Hello world!</h1>
+<!-- <h1>Hello world!</h1>
 <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 <p>
     This template is pre-configured with svlete-spa-router for routing.<br/>
@@ -15,4 +15,4 @@
 		font-size: 4em;
 		font-weight: 100;
 	}
-</style>
+</style> -->

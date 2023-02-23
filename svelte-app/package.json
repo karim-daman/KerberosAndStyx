@@ -17,6 +17,8 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "@carbon/icons": "^11.16.1",
+    "carbon-icons-svelte": "^11.4.0",
     "svelte-spa-chunk": "^2.0.0",
     "svelte-spa-router": "^3.0.4"
   }
