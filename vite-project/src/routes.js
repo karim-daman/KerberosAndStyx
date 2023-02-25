@@ -7,12 +7,16 @@ const Chunk = ChunkGenerator(ChunkComponent)
  */
 export default {
     '/':        Chunk(()=> import('./routes/Home.svelte')),
-    '/About':        Chunk(()=> import('./routes/About.svelte')),
-    '/Contact':        Chunk(()=> import('./routes/Contact.svelte')),
-    '/Projects':        Chunk(()=> import('./routes/Projects.svelte')),
-    '/Music':        Chunk(()=> import('./routes/Music.svelte')),
-    '/Portofolio':        Chunk(()=> import('./routes/Portofolio.svelte')),
-    '/lorem/:repeat':       Chunk(()=> import('./routes/Lorem.svelte')),
+    '/About':  Chunk(()=> import('./routes/About.svelte')),
+    '/Contact':  Chunk(()=> import('./routes/Contact.svelte')),
+    '/Music':  Chunk(()=> import('./routes/Music.svelte')),
+    '/Film':  Chunk(()=> import('./routes/Film.svelte')),
+    '/Commercial':  Chunk(()=> import('./routes/Commercial.svelte')),
+
+
+
+
+    // '/a':       Chunk(()=> import('./a.svelte')),
     // '/b':       Chunk(()=> import('./b.svelte')),
     // '/async':   Chunk(()=> import('./async.svelte')),
 
