@@ -7,7 +7,7 @@
   let isHome = $location == "/" ? true : false;
 
   onMount(() => {
-    const delayInMilliseconds = 1000;
+    const delayInMilliseconds = 3000;
     setTimeout(() => {
       isReady = true;
     }, delayInMilliseconds);
