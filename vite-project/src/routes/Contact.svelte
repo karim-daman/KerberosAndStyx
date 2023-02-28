@@ -93,7 +93,6 @@
             <div class="relative mb-4">
               <label for="name" class="float-left leading-7 text-sm text-gray-600">Name</label>
               <input
-                required
                 placeholder="Your name (optional)"
                 type="name"
                 id="name"
