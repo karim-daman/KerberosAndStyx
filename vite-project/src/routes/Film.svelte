@@ -10,9 +10,9 @@
     <Nav />
   </div>
   <section in:fade={{ delay: 300 }} out:fade={{ delay: 100 }} class="text-gray-600 body-font ">
-    <div class="container px-5 py-24 mx-auto flex flex-wrap mt-28 ">
+    <div class="container px-5 py-24 mx-auto mt-28">
       <div class="flex flex-wrap -m-4 ">
-        <div class="p-4 lg:w-1/2 md:w-full ">
+        <div class="p-4 lg:w-1/2">
           <div style="padding:56.25% 0 0 0;position:relative;">
             <iframe
               title=""
