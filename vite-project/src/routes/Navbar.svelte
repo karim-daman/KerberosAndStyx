@@ -1,45 +1,68 @@
 <script>
-  let isDropdownVisible = false;
+  import { fade } from "svelte/transition";
+  import { onMount } from "svelte";
+  import { location } from "svelte-spa-router";
 
-  function toggleDropdown() {
-    isDropdownVisible = !isDropdownVisible;
-  }
+  let isReady = false;
+  let isHome = $location == "/" ? true : false;
 
-  let open;
+  onMount(() => {
+    const delayInMilliseconds = 1000;
+    setTimeout(() => {
+      isReady = true;
+    }, delayInMilliseconds);
+  });
 </script>
 
-<nav class="">
-  <ul>
-    <li><a href="#/"> <img class="" src={"/LOGO/Kerberos_and_Styx_Logo_Site.png"} width="450" height="auto" alt="logo" /> </a></li>
-  </ul>
-  <ul>
-    <li><a href="#/">Home</a></li>
-    <li><a href="#/About">About</a></li>
-    <li><a href="#/Music">Music</a></li>
+{#if isHome}
+  {#if isReady}
+    <nav in:fade={{ delay: 300 }} class=" m-6">
+      <ul>
+        <li><a href="#/"> <img class="" src={"/LOGO/Kerberos_and_Styx_Logo_Site.png"} width="450" height="auto" alt="logo" /> </a></li>
+      </ul>
+      <ul>
+        <li><a href="#/" class="">Home</a></li>
+        <li><a href="#/About" class="">About</a></li>
+        <li><a href="#/Music" class="">Music</a></li>
 
-    <li class="">
-      <!-- <div class="relative inline-block text-left ">
-        <button on:click={toggleDropdown}> Projects </button>
-        <div class={`   ${isDropdownVisible ? "" : "hidden"}`}>
-          <div class="dropdown-content absolute">
-            <a href="#/Film" class="block py-2 text-gray-800"> Film </a>
-            <a href="#/Commercial" class="block py-2 text-gray-800"> Commercial </a>
+        <li class="">
+          <div class="dropdown">
+            <button class="">Projects</button>
+            <div class="dropdown-content">
+              <a href="#/Film" class="block py-2 text-gray-800 float-left"> Film </a>
+              <a href="#/Commercial" class="block py-2 text-gray-800 float-left"> Commercial </a>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="#/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  {/if}
+{:else}
+  <nav out:fade={{ delay: 300 }} class=" m-6">
+    <ul>
+      <li><a href="#/"> <img class="" src={"/LOGO/Kerberos_and_Styx_Logo_Site.png"} width="450" height="auto" alt="logo" /> </a></li>
+    </ul>
+    <ul>
+      <li class="hover:shadow-xl"><a href="#/">Home</a></li>
+      <li class="hover:shadow-xl"><a href="#/About">About</a></li>
+      <li class="hover:shadow-xl"><a href="#/Music">Music</a></li>
+
+      <li class="">
+        <div class="dropdown">
+          <button class="">Projects</button>
+          <div class="dropdown-content">
+            <a href="#/Film" class="block py-2 text-gray-800 float-left"> Film </a>
+            <a href="#/Commercial" class="block py-2 text-gray-800 float-left"> Commercial </a>
           </div>
         </div>
-      </div> -->
+      </li>
 
-      <div class="dropdown">
-        <button class="hover:underline">Projects</button>
-        <div class="dropdown-content">
-          <a href="#/Film" class="block py-2 text-gray-800 float-left"> Film </a>
-          <a href="#/Commercial" class="block py-2 text-gray-800 float-left"> Commercial </a>
-        </div>
-      </div>
-    </li>
-
-    <li><a href="#/Contact">Contact</a></li>
-  </ul>
-</nav>
+      <li><a href="#/Contact">Contact</a></li>
+    </ul>
+  </nav>
+{/if}
 
 <style>
   nav {
@@ -67,7 +90,6 @@
   }
 
   a:hover {
-    text-decoration: underline;
     color: #b48a00;
   }
 

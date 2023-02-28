@@ -1,6 +1,10 @@
 import { ChunkGenerator } from 'svelte-spa-chunk'
 import ChunkComponent from 'svelte-spa-chunk/Chunk.svelte'
+import { wrap } from 'svelte-spa-router/wrap'
+import { push } from 'svelte-spa-router';
 const Chunk = ChunkGenerator(ChunkComponent)
+
+
 
 /**
  * @description Client Side Render Index
@@ -12,13 +16,7 @@ export default {
     '/Music':  Chunk(()=> import('./routes/Music.svelte')),
     '/Film':  Chunk(()=> import('./routes/Film.svelte')),
     '/Commercial':  Chunk(()=> import('./routes/Commercial.svelte')),
-
-
-
-
-    // '/a':       Chunk(()=> import('./a.svelte')),
-    // '/b':       Chunk(()=> import('./b.svelte')),
-    // '/async':   Chunk(()=> import('./async.svelte')),
+    '/ThankYou':  Chunk(()=> import('./routes/ThankYou.svelte')),
 
     '*':        Chunk(()=> import('./routes/NotFound.svelte')),
 }
