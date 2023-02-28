@@ -94,8 +94,7 @@
 
   @font-face {
     font-family: "My Custom Font";
-    /* src: url("/Font/Next-Mono-Thin.otf") format("opentype"); */
-    src: url("./Font/NEXT-Mono-Thin.otf") format("opentype");
+    src: url("/Font/NEXT-Mono-Thin.otf") format("opentype");
   }
 
   main {
