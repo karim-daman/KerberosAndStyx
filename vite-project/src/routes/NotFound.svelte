@@ -2,9 +2,9 @@
   import Nav from "../routes/Navbar.svelte";
 </script>
 
-<div class="fixed inset-0 bg-black opacity-60" />
+<div class="fixed inset-0 bg-black opacity-60  overflow-auto" />
 
-<div class="fixed w-full z-10 h-full backdrop-blur-sm">
+<div class="fixed w-full z-10 h-full backdrop-blur-sm  overflow-auto">
   <div class="px-10">
     <Nav />
   </div>

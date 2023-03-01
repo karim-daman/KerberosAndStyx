@@ -3,26 +3,22 @@
   import { fade } from "svelte/transition";
 </script>
 
-<div class="fixed inset-0  bg-black opacity-60" />
+<div class="fixed inset-0  bg-black opacity-60 overflow-auto" />
 
-<div class="fixed w-full z-10 h-full backdrop-blur-sm">
+<div class="fixed w-full z-10 h-full backdrop-blur-sm overflow-auto">
   <div in:fade={{ delay: 300 }} out:fade={{ delay: 100 }} class="px-10">
     <Nav />
   </div>
 
   <section in:fade={{ delay: 300 }} out:fade={{ delay: 100 }} class="text-gray-600 body-font mt-40">
     <div class="container px-5 py-24 mx-auto">
-      <div class="text-justify xl:w-3/4 lg:w-3/4 w-full mx-auto ">
-        <p>Kerberos.and.Styx. is a sound design and audio production studio where experimentation is the key. Experimentation into the unknown roots for creativity and space for evolution.</p>
-        <br />
-        <p>
-          Kerberos.and.Styx.Studios (KSS) is a collaboration with(musician/sound designer) AKA Nisham Olakara. Kerberos.and.Styx's work is most suited for Documentaries, Certain genre's of films
-          (Sci-fi, Thriller, Dystopian, etc.), Art installations and other commercial purposes such as ads that target very specific niches. KSS also welcomes companies that design software, apps or
-          devices that require sound to optimize user experience.
+      <div class="text-center xl:w-3/4 lg:w-3/4 w-full mx-auto ">
+        <p class="leading-loose">
+          Kerberos.and.Styx.Studios is a sound design and music production studio where experimentation is the key. Experimentation into the unknown roots for creativity and space for evolution.
+          Kerberos.and.Styx.Studios (KSS) was founded and is operated by musician and sound designer Nisham Olakara. KSS specialises in original music and sound design for sonic branding,
+          documentaries, film and art installations. KSS also designs custom sounds for companies that design and build software, apps or devices. That requires sound or music to enhance the user
+          experience. If you’re curious to know more, collaborate or just have tea, please visit the <a href="#/Contact">contact page</a> to leave a word.
         </p>
-        <br />
-
-        <p>For quotes, inquiries, and questions that may arise please visit the <a href="#/Contact">contact page</a>.</p>
       </div>
     </div>
   </section>
@@ -33,6 +29,6 @@
     color: white;
   }
   a {
-    color: lightskyblue;
+    color: gray;
   }
 </style>

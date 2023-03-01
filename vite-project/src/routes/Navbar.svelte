@@ -6,6 +6,8 @@
   let isReady = false;
   let isHome = $location == "/" ? true : false;
 
+  let isMenuOpen = false;
+
   onMount(() => {
     const delayInMilliseconds = 3000;
     setTimeout(() => {
@@ -18,53 +20,53 @@
   {#if isReady}
     <nav in:fade={{ delay: 300 }} class=" m-6">
       <ul>
-        <li><a href="#/"> <img class="" src={"/LOGO/Kerberos_and_Styx_Logo_Site.png"} width="450" height="auto" alt="logo" /> </a></li>
+        <li class="active:scale-95"><a href="#/"> <img class="" src={"/LOGO/Kerberos_and_Styx_Logo_Site.png"} width="450" height="auto" alt="logo" /> </a></li>
       </ul>
       <ul>
-        <li><a href="#/" class="">Home</a></li>
-        <li><a href="#/About" class="">About</a></li>
-        <li><a href="#/Music" class="">Music</a></li>
-
-        <li class="">
+        <li class="active:scale-95"><a href="#/" class="">Home</a></li>
+        <li class="active:scale-95"><a href="#/Music" class="">Music</a></li>
+        <li>
           <div class="dropdown">
             <button class="">Projects</button>
             <div class="dropdown-content">
-              <a href="#/Film" class="block py-2 text-gray-800 float-left"> Film </a>
-              <a href="#/Commercial" class="block py-2 text-gray-800 float-left"> Commercial </a>
+              <a href="#/Film" class="block py-2 text-gray-800 float-left active:scale-95"> Film </a>
+              <a href="#/Commercial" class="block py-2 text-gray-800 float-left active:scale-95"> Commercial </a>
             </div>
           </div>
         </li>
-
-        <li><a href="#/Contact">Contact</a></li>
+        <li class="active:scale-95"><a href="#/About">About</a></li>
+        <li class="active:scale-95"><a href="#/Contact" class="">Contact</a></li>
       </ul>
     </nav>
   {/if}
 {:else}
   <nav out:fade={{ delay: 300 }} class=" m-6">
     <ul>
-      <li><a href="#/"> <img class="" src={"/LOGO/Kerberos_and_Styx_Logo_Site.png"} width="450" height="auto" alt="logo" /> </a></li>
+      <li class="active:scale-95"><a href="#/"> <img src={"/LOGO/Kerberos_and_Styx_Logo_Site.png"} width="450" height="auto" alt="logo" /> </a></li>
     </ul>
     <ul>
-      <li class="hover:shadow-xl"><a href="#/">Home</a></li>
-      <li class="hover:shadow-xl"><a href="#/About">About</a></li>
-      <li class="hover:shadow-xl"><a href="#/Music">Music</a></li>
-
-      <li class="">
+      <li class="active:scale-95"><a href="#/">Home</a></li>
+      <li class="active:scale-95"><a href="#/Music">Music</a></li>
+      <li>
         <div class="dropdown">
           <button class="">Projects</button>
           <div class="dropdown-content">
-            <a href="#/Film" class="block py-2 text-gray-800 float-left"> Film </a>
-            <a href="#/Commercial" class="block py-2 text-gray-800 float-left"> Commercial </a>
+            <a href="#/Film" class="block py-2 text-gray-800 float-left active:scale-95"> Film </a>
+            <a href="#/Commercial" class="block py-2 text-gray-800 float-left active:scale-95"> Commercial </a>
           </div>
         </div>
       </li>
-
-      <li><a href="#/Contact">Contact</a></li>
+      <li class="active:scale-95"><a href="#/About">About</a></li>
+      <li class="active:scale-95"><a href="#/Contact">Contact</a></li>
     </ul>
   </nav>
 {/if}
 
 <style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
   nav {
     display: flex;
     justify-content: space-between;

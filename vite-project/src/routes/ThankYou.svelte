@@ -12,9 +12,9 @@
   });
 </script>
 
-<div class="fixed inset-0  bg-black opacity-60" />
+<div class="fixed inset-0  bg-black opacity-60 overflow-auto" />
 
-<div class="fixed w-full z-10 ">
+<div class="fixed w-full z-10  overflow-auto">
   <div in:fade={{ delay: 300 }} out:fade={{ delay: 100 }} class="px-10">
     <Nav />
   </div>
