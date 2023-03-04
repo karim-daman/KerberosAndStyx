@@ -87,71 +87,77 @@
           </div>
         </div>
 
-        <div class=" md:h-auto  relative">
-          <div class="lg:w-96 flex flex-col w-full  md:py-8 mt-8 md:mt-0 left-0 ">
-            <div class="w-full">
-              <div class="relative">
-                <label for="name" class="leading-7 text-sm text-white">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Your name"
-                  class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-              </div>
-            </div>
+        <form action="https://formsubmit.co/03c1e16980307ba5d7cbdc84a4094088" method="POST">
+          <input type="hidden" name="_next" value="https://www.kerberosandstyx.com/#/ThankYou" />
+          <input type="hidden" name="_subject" value={"Name: " + name + ", Company: " + company + ", Profession: " + profession} />
+          <input type="hidden" name="_captcha" value="false" />
 
-            <div class="flex">
-              <div class="w-1/2 pr-1">
+          <div class=" md:h-auto  relative">
+            <div class="lg:w-96 flex flex-col w-full  md:py-8 mt-8 md:mt-0 left-0 ">
+              <div class="w-full">
                 <div class="relative">
-                  <label for="profession" class="leading-7 text-sm text-white">profession</label>
-                  <input
-                    type="profession"
-                    id="profession"
-                    name="profession"
-                    placeholder=" (Optional)"
-                    class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                </div>
-              </div>
-
-              <div class="w-1/2 pl-1">
-                <div class="relative">
-                  <label for="company" class="leading-7 text-sm text-white">Company</label>
+                  <label for="name" class="leading-7 text-sm text-white">Name</label>
                   <input
                     type="text"
-                    id="company"
-                    name="company"
-                    placeholder=" (Optional)"
-                    class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    class="w-full bg-black opacity-80 bg-opacity-90 rounded focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
-            </div>
-            <div class="w-full">
-              <div class="relative">
-                <label for="Email" class="leading-7 text-sm text-white">Email</label>
-                <input
-                  type="Email"
-                  id="Email"
-                  name="Email"
-                  placeholder="Your Email"
-                  class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+
+              <div class="flex">
+                <div class="w-1/2 pr-1">
+                  <div class="relative">
+                    <label for="profession" class="leading-7 text-sm text-white">profession</label>
+                    <input
+                      type="profession"
+                      id="profession"
+                      name="profession"
+                      placeholder=" (Optional)"
+                      class="w-full bg-black opacity-80 bg-opacity-90 rounded focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  </div>
+                </div>
+
+                <div class="w-1/2 pl-1">
+                  <div class="relative">
+                    <label for="company" class="leading-7 text-sm text-white">Company</label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      placeholder=" (Optional)"
+                      class="w-full bg-black opacity-80 bg-opacity-90 rounded focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="w-full">
-              <div class="relative">
-                <label for="message" class="leading-7 text-sm text-white">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Your message.."
-                  class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  h-32 text-base outline-none text-white py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" />
+              <div class="w-full">
+                <div class="relative">
+                  <label for="Email" class="leading-7 text-sm text-white">Email</label>
+                  <input
+                    type="Email"
+                    id="Email"
+                    name="Email"
+                    placeholder="Your Email"
+                    class="w-full bg-black opacity-80 bg-opacity-90 rounded focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                </div>
               </div>
-            </div>
-            <div class="w-full">
-              <button class=" w-full  text-white bg-green-800 active:scale-[98%] border-0 py-2 px-8 focus:outline-none  active:bg-green-700 rounded text-lg">Send</button>
+              <div class="w-full">
+                <div class="relative">
+                  <label for="message" class="leading-7 text-sm text-white">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Your message.."
+                    class="w-full bg-black opacity-80 bg-opacity-90 rounded focus:ring-2  h-32 text-base outline-none text-white py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" />
+                </div>
+              </div>
+              <div class="w-full">
+                <button type="submit" class=" w-full text-white bg-green-800 active:scale-[98%] border-0 py-2 px-8 focus:outline-none active:bg-green-700 rounded text-lg">Send</button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
