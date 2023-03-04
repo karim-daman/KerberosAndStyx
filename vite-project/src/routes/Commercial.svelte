@@ -9,9 +9,10 @@
     <div class="mb-10 md:mb-16">
       <div class="flex flex-wrap w-full text-white py-6 px-10 relative mb-4">
         <div class="text-center relative z-10 w-full">
-          La Semillas De La Tierra ‘La Semillas De La Tierra’ is a short film directed by <a target="_blank" rel="noreferrer" href="https://geraldarkensteijn.com/">Gerard Arkensteijn</a> about a man trying
-          to connect with his recently deceased father. Nisham was the sound designer and composer for the whole film. Recording the voice over, treating the audio, designing the SFX, composing the music,
-          mixing and mastering was done within Kerberos.and.Styx.Studios. Except of course the audio he received along with the footage.
+          KSS has been involved in some of the most influential campaigns in the middle east along with <a href="https://whatif.ae/">What if Creative Studio</a> since the beginning of 2022. These
+          projects included sound design of effects, <a href="https://vimeo.com/788013794">composition</a> , field recording, <a href="https://vimeo.com/788009574">voice over repair</a> and
+          <a href="https://soundcloud.com/nisham-olakara/unclean-audio?si=b4cbe5e1cdfd46f88b0a93f8b8608c51&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">treating</a> , mixing and mastering.
+          Some of the projects KSS was and is included in are Expo 2022, Oxagon, Neom and more.
         </div>
       </div>
     </div>
