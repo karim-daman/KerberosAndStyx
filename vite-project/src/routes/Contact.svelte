@@ -27,7 +27,7 @@
             <br />
             <div class="lg:w-2/3 mt-4 lg:mt-0 ">
               <p class=" leading-relaxed text-white flex relative w-auto ">
-                Email <code class="blur-sm px-2 hover:blur-none text-blue-800">kerberos.and.styx@gmail.com</code>
+                Email <code class="blur-sm px-2 hover:blur-none text-blue-800"><a href="mailto:kerberos.and.styx@gmail.com">kerberos.and.styx@gmail.com</a></code>
                 <button class="rounded-sm w-4 h-4 absolute right-0  active:scale-95" on:click={copyEmail}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-2">
                     <path
@@ -38,7 +38,7 @@
                 </button>
               </p>
               <p class=" leading-relaxed text-white flex relative w-auto ">
-                Tel <code class="blur-sm px-2 hover:blur-none text-blue-800">+31 (0) 6 44 01 73 66</code>
+                Tel <code class="blur-sm px-2 hover:blur-none text-blue-800 ml-4">+31 (0) 6 44 01 73 66</code>
                 <button class="rounded-sm w-4 h-4 absolute right-0 active:scale-95" on:click={copyTel}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 pr-2">
                     <path
