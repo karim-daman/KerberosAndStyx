@@ -43,7 +43,7 @@
 <main class="">
   <Router {routes} />
 
-  <video bind:this={video} id="background-video" bind:paused onloadstart="this.volume=0.1" autoplay loop bind:muted>
+  <video bind:this={video} id="background-video" bind:paused onloadstart="this.volume=0.1" playsinline autoplay loop bind:muted>
     <track kind="captions" />
     <source src={"./source_vp9.webm"} type="video/webm;codec=vp9" />
     <source src={"./source_264.mp4"} type="video/mp4" />
