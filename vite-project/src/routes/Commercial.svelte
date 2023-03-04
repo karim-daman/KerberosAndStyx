@@ -17,7 +17,7 @@
     </div>
 
     <div class="grid lg:grid-cols-2 gap-6">
-      <div class="group h-96 flex items-end rounded-lg overflow-hidden relative p-4">
+      <div class="group h-36  sm:h-96  flex items-end rounded-lg overflow-hidden relative p-4">
         <iframe
           title=""
           src="https://player.vimeo.com/video/788003496?h=d4009a1361&title=0&byline=0&portrait=0"
@@ -27,7 +27,7 @@
           allowfullscreen />
       </div>
 
-      <div class="group h-96 flex items-end rounded-lg overflow-hidden relative p-4">
+      <div class="group h-36  sm:h-96  flex items-end rounded-lg overflow-hidden relative p-4">
         <iframe
           title=""
           src="https://player.vimeo.com/video/690981857?h=f2f356c183&title=0&byline=0&portrait=0"

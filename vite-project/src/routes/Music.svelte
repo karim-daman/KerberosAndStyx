@@ -28,7 +28,7 @@
       <br />
 
       <div class="grid sm:grid-cols-2 gap-8 m-2">
-        <div class="h-80 md:h-auto overflow-hidden ">
+        <div class=" md:h-auto overflow-hidden ">
           <div style="max-width: 700px;">
             <div style="left: 0; width: 100%; height: 241px; position: relative;">
               <iframe

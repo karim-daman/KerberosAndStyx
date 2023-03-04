@@ -16,7 +16,7 @@
 </script>
 
 <div class="flex h-screen ">
-  <div in:fade={{ delay: 300 }} class="py-6 sm:py-8 lg:py-12 m-auto relative z-20 ">
+  <div in:fade={{ delay: 300 }} class="py-6 sm:py-8 lg:py-12 md:m-auto relative z-20 ">
     <div class="max-w-screen-lg px-4 md:px-8 mx-auto">
       <div class="grid sm:grid-cols-2 gap-2">
         <div class="flex flex-col justify-center items-center sm:items-start md:py-24 lg:py-32">
@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <div class=" md:h-auto  overflow-hidden relative">
+        <div class=" md:h-auto  relative">
           <div class="lg:w-96 flex flex-col w-full  md:py-8 mt-8 md:mt-0 left-0 ">
             <div class="w-full">
               <div class="relative">
@@ -97,7 +97,7 @@
                   id="name"
                   name="name"
                   placeholder="Your name"
-                  class="w-full bg-black opacity-80 bg-opacity-90 rounded border    focus:ring-2 focus:ring-[#b48a22]  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
               </div>
             </div>
 
@@ -110,7 +110,7 @@
                     id="profession"
                     name="profession"
                     placeholder=" (Optional)"
-                    class="w-full bg-black opacity-80 bg-opacity-90 rounded border    focus:ring-2 focus:ring-[#b48a22]  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
 
@@ -122,7 +122,7 @@
                     id="company"
                     name="company"
                     placeholder=" (Optional)"
-                    class="w-full bg-black opacity-80 bg-opacity-90 rounded border    focus:ring-2 focus:ring-[#b48a22]  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@
                   id="Email"
                   name="Email"
                   placeholder="Your Email"
-                  class="w-full bg-black opacity-80 bg-opacity-90 rounded border    focus:ring-2 focus:ring-[#b48a22]  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
               </div>
             </div>
             <div class="w-full">
@@ -144,7 +144,7 @@
                   id="message"
                   name="message"
                   placeholder="Your message.."
-                  class="w-full bg-black opacity-80 bg-opacity-90 rounded border    focus:ring-2 focus:ring-[#b48a22]  h-32 text-base outline-none text-white py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" />
+                  class="w-full bg-black opacity-80 bg-opacity-90 rounded     focus:ring-2  h-32 text-base outline-none text-white py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" />
               </div>
             </div>
             <div class="w-full">
