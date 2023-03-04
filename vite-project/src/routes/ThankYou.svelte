@@ -1,39 +1,9 @@
-<script>
-  import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
-  import { push } from "svelte-spa-router";
-  import Nav from "../routes/Navbar.svelte";
+<div class=" py-6 sm:py-8 lg:py-12 relative z-20">
+  <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+    <div class=" px-4 py-6 md:py-8 lg:py-12">
+      <p class="text-green-500 lg:text-lg font-semibold text-center mb-2 md:mb-3">Thank You!</p>
 
-  let delayInMilliseconds = 30000;
-  onMount(() => {
-    setTimeout(() => {
-      push("/");
-    }, delayInMilliseconds);
-  });
-</script>
-
-<div class="fixed inset-0  bg-black opacity-60 overflow-auto" />
-
-<div class="fixed w-full z-10  overflow-auto">
-  <div in:fade={{ delay: 300 }} out:fade={{ delay: 100 }} class="px-10">
-    <Nav />
-  </div>
-  <section in:fade={{ delay: 300 }} out:fade={{ delay: 100 }} class="text-gray-600 body-font mt-40">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="text-justify xl:w-1/2 lg:w-3/4 w-full mx-auto ">
-        <h1>Thank you for reaching out!</h1>
-        <p>Your message has been delivered.</p>
-        <p>Redirecting shortly.</p>
-      </div>
+      <h2 class="text-green-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">for reaching out,</h2>
     </div>
-  </section>
+  </div>
 </div>
-
-<style>
-  p {
-    color: white;
-  }
-  a {
-    color: lightskyblue;
-  }
-</style>

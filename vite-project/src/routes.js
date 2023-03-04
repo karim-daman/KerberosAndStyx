@@ -1,10 +1,6 @@
 import { ChunkGenerator } from 'svelte-spa-chunk'
 import ChunkComponent from 'svelte-spa-chunk/Chunk.svelte'
-import { wrap } from 'svelte-spa-router/wrap'
-import { push } from 'svelte-spa-router';
 const Chunk = ChunkGenerator(ChunkComponent)
-
-
 
 /**
  * @description Client Side Render Index
