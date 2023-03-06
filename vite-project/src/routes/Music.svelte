@@ -11,9 +11,11 @@
             <div style="left: 0; width: 100%; height: 120px; position: relative;">
               <iframe
                 title=""
-                src="https://bandcamp.com/EmbeddedPlayer/size=large/bgcol=333333/linkcol=333333/tracklist=false/artwork=small/track=3950534310/transparent=true/"
+                src="https://bandcamp.com/EmbeddedPlayer/size=large/bgcol=333333/linkcol=2ebd35/tracklist=false/artwork=small/track=3950534310/transparent=true/"
                 style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;"
                 allowfullscreen />
+
+            
             </div>
           </div>
         </div>
@@ -33,7 +35,7 @@
             <div style="left: 0; width: 100%; height: 241px; position: relative;">
               <iframe
                 title=""
-                src="https://bandcamp.com/EmbeddedPlayer/album=876119262/size=large/bgcol=333333/linkcol=333333/artwork=small/transparent=true/"
+                src="https://bandcamp.com/EmbeddedPlayer/album=876119262/size=large/bgcol=333333/linkcol=2ebd35/artwork=small/transparent=true/"
                 style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;"
                 allowfullscreen />
             </div>

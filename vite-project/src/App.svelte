@@ -47,6 +47,7 @@
     <track kind="captions" />
     <source src={"./source_vp9.webm"} type="video/webm;codec=vp9" />
     <source src={"./source_264.mp4"} type="video/mp4" />
+    <source src={"./output.mp4"} type="video/mp4" />
   </video>
 
   <div id="video-controls" class="z-20   w-full flex mb-2 ">
