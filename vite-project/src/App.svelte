@@ -7,7 +7,7 @@
   import { onMount } from "svelte";
 
   let video;
-  let volume = 0.75;
+  let volume = 0.1;
   let muted = true;
   let paused = true;
 
@@ -45,7 +45,7 @@
 
   <video bind:this={video} id="background-video" bind:paused onloadstart="this.volume=0.1" playsinline autoplay loop bind:muted>
     <track kind="captions" />
-    <source src={"./output.mp4"} type="video/mp4; codec=hevc" />
+    <source src={"./output_h265.mp4"} type="video/mp4;codec=hevc" />
     <source src={"./source_vp9.webm"} type="video/webm;codec=vp9" />
     <source src={"./source_264.mp4"} type="video/mp4" />
   </video>
