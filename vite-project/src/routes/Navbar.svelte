@@ -6,13 +6,13 @@
   let dropDownOpen = false;
   let size = "";
 
-  function toggleNavbar() {
-    navBarOpen = !navBarOpen;
-  }
+  // function toggleNavbar() {
+  //   navBarOpen = !navBarOpen;
+  // }
 
-  function toggleDropDown() {
-    dropDownOpen = !dropDownOpen;
-  }
+  // function toggleDropDown() {
+  //   dropDownOpen = !dropDownOpen;
+  // }
 
   function unselect() {
     // dropDownOpen = false;
@@ -23,7 +23,7 @@
   // let isHome = $location == "/" ? true : false;
 
   onMount(() => {
-    const delayInMilliseconds = 3000;
+    const delayInMilliseconds = 4000;
     setTimeout(() => {
       isReady = true;
     }, delayInMilliseconds);
@@ -38,22 +38,26 @@
       </a>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" on:click={toggleNavbar} class="h-6 w-6 cursor-pointer md:hidden block text-white" fill="white" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" on:click={toggleNavbar} class="h-6 w-6 cursor-pointer md:hidden block text-white" fill="white" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
+    </svg> -->
 
-    <div class=" transition ease-out duration-100 {navBarOpen ? 'hidden' : 'block'}  w-full md:flex md:items-center md:w-auto " id="menu">
-      <ul class="text-left pt-4 text-base  md:flex md:justify-between md:pt-0">
+    <div class=" transition ease-out duration-100 {navBarOpen ? 'hidden' : 'block'}  w-full md:flex md:items-center md:w-auto" id="menu">
+      <ul class="text-left pt-4 text-base md:flex md:justify-between md:pt-0">
         <li class="">
-          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 " on:click={unselect} href="#/">Home</a>
+          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect} href="#/">Home</a>
         </li>
         <li class="">
-          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Music' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 " on:click={unselect} href="#/Music">Music</a>
+          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Music' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect} href="#/Music">Music</a>
         </li>
 
         <li class="">
-          <div class="hover:text-[#b48a22] relative inline-block ">
-            <button class="md:p-4 py-2  active:scale-95 active: text-white flex " on:click={toggleDropDown}
+          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Projects' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect} href="#/Projects">Projects</a>
+        </li>
+
+        <!-- <li class="">
+          <div class="hover:text-[#b48a22] relative inline-block">
+            <button class="md:p-4 py-2 active:scale-95 active: text-white flex" on:click={toggleDropDown}
               >Projects
 
               {#if dropDownOpen}
@@ -66,12 +70,12 @@
                 </svg>
               {/if}
             </button>
-            <div class="absolute {dropDownOpen ? 'block' : 'hidden'}  rounded-md  {innerWidth > 760 ? '' : 'ml-32 -mt-10'}    ">
-              <a href="#/Film" class=" hover:text-[#b48a22] block px-4 py-1  {$location == '/Film' ? 'text-[#b48a00]' : 'text-white'} " on:click={unselect}>Film</a>
-              <a href="#/Commercial" class=" hover:text-[#b48a22] block px-4 py-1  {$location == '/Commercial' ? 'text-[#b48a00]' : 'text-white'} " on:click={unselect}>Commercial</a>
+            <div class="absolute {dropDownOpen ? 'block' : 'hidden'}  rounded-md {innerWidth > 760 ? '' : 'ml-32 -mt-10'}    ">
+              <a href="#/Film" class=" hover:text-[#b48a22] block px-4 py-1 {$location == '/Film' ? 'text-[#b48a00]' : 'text-white'} " on:click={unselect}>Film</a>
+              <a href="#/Commercial" class=" hover:text-[#b48a22] block px-4 py-1 {$location == '/Commercial' ? 'text-[#b48a00]' : 'text-white'} " on:click={unselect}>Commercial</a>
             </div>
           </div>
-        </li>
+        </li> -->
 
         <!-- <li>
         <div class="dropdown">
@@ -84,10 +88,10 @@
       </li> -->
 
         <li class="">
-          <a href="#/About" class=" hover:text-[#b48a22] md:p-4 py-2 block {$location == '/About' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 " on:click={unselect}>About</a>
+          <a href="#/About" class=" hover:text-[#b48a22] md:p-4 py-2 block {$location == '/About' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect}>About</a>
         </li>
         <li class="">
-          <a href="#/Contact" class=" hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Contact' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 " on:click={unselect}>Contact</a>
+          <a href="#/Contact" class=" hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Contact' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect}>Contact</a>
         </li>
       </ul>
     </div>
