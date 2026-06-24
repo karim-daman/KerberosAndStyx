@@ -8,225 +8,6 @@
 
   let video;
   let volume = 0.1;
-  let muted = true; // Start muted for autoplay
-  let paused = false; // Start playing
-
-  onMount(() => {
-    // Try to play the video immediately (muted)
-    if (video) {
-      video.volume = volume;
-      video.muted = true; // Ensure muted for autoplay
-      attemptPlay();
-    }
-
-    // Handle visibility change to ensure video keeps playing
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  });
-
-  function attemptPlay() {
-    if (!video) return;
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          paused = false;
-        })
-        .catch((error) => {
-          console.log("Playback prevented:", error);
-          paused = true;
-        });
-    }
-  }
-
-  function handleVisibilityChange() {
-    if (!document.hidden && video && !paused) {
-      attemptPlay();
-    }
-  }
-
-  function handleMute() {
-    muted = !muted;
-    video.muted = muted;
-  }
-
-  function handlePlay() {
-    if (paused) {
-      attemptPlay();
-    } else {
-      video.pause();
-      paused = true;
-    }
-  }
-
-  function handleVolumeChange(event) {
-    volume = parseFloat(event.target.value);
-    video.volume = volume;
-
-    // If user adjusts volume, unmute
-    if (volume > 0 && muted) {
-      muted = false;
-      video.muted = false;
-    }
-  }
-
-  // Watch for route changes to keep video playing
-  $: if ($location && video && !paused) {
-    setTimeout(() => {
-      if (video.paused) {
-        attemptPlay();
-      }
-    }, 100);
-  }
-</script>
-
-<div class="navFont">
-  <Navbar />
-</div>
-
-{#if $location != "/"}
-  <div out:fade in:fade class="fixed inset-0 w-full h-full backdrop-blur-sm overflow-auto z-10" />
-  <div out:fade in:fade class="fixed inset-0 w-full h-full bg-black opacity-60 overflow-auto z-10" />
-{/if}
-
-<main class="">
-  <Router {routes} />
-
-  <video
-    bind:this={video}
-    id="background-video"
-    playsinline
-    autoplay
-    loop
-    {muted}
-    on:canplay={() => {
-      if (!paused) {
-        attemptPlay();
-      }
-    }}
-    on:ended={() => {
-      video.currentTime = 0;
-      attemptPlay();
-    }}>
-    <track kind="captions" />
-    <source src={"./output_h265.mp4"} type="video/mp4;codec=hevc" />
-    <source src={"./source_vp9.webm"} type="video/webm;codec=vp9" />
-    <source src={"./source_264.mp4"} type="video/mp4" />
-  </video>
-
-  <div id="video-controls" class="z-20 fixed bottom-0 left-0 right-0 flex justify-between items-center p-4">
-    <div class="flex items-center space-x-2">
-      <button on:click={handleMute} class="opacity-40 hover:opacity-80 transition-opacity rounded-full p-2 bg-slate-500">
-        {#if muted}
-          <svg fill="#ffffff" class="w-5 h-5" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zM461.64 256l45.64-45.64c6.3-6.3 6.3-16.52 0-22.82l-22.82-22.82c-6.3-6.3-16.52-6.3-22.82 0L416 210.36l-45.64-45.64c-6.3-6.3-16.52-6.3-22.82 0l-22.82 22.82c-6.3 6.3-6.3 16.52 0 22.82L370.36 256l-45.63 45.63c-6.3 6.3-6.3 16.52 0 22.82l22.82 22.82c6.3 6.3 16.52 6.3 22.82 0L416 301.64l45.64 45.64c6.3 6.3 16.52 6.3 22.82 0l22.82-22.82c6.3-6.3 6.3-16.52 0-22.82L461.64 256z" />
-          </svg>
-        {:else}
-          <svg fill="#ffffff" class="w-5 h-5" viewBox="0 -32 576 576" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95-7.34 11.17-4.22 26.18 6.95 33.51 66.27 43.49 105.82 116.6 105.82 195.58 0 78.98-39.55 152.09-105.82 195.58-11.17 7.32-14.29 22.34-6.95 33.5 7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z" />
-          </svg>
-        {/if}
-      </button>
-
-      <input class="w-24 md:w-32" type="range" min="0" max="1" step="0.01" value={volume} on:input={handleVolumeChange} />
-    </div>
-
-    <button on:click={handlePlay} class="opacity-40 hover:opacity-80 transition-opacity rounded-full p-2 bg-slate-500 {$location == '/' ? 'block' : 'hidden'}">
-      {#if paused}
-        <svg fill="#ffffff" class="w-5 h-5" viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
-        </svg>
-      {:else}
-        <svg fill="#ffffff" class="w-5 h-5" viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z" />
-        </svg>
-      {/if}
-    </button>
-  </div>
-</main>
-
-<style>
-  #background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-
-  /* Custom range input styling */
-  input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    outline: none;
-  }
-
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-  }
-
-  input[type="range"]::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    border: none;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
-
-  @font-face {
-    font-family: "My Custom Font";
-    src: url("/Font/NHaasGroteskTXPro-65Md.otf") format("opentype");
-  }
-
-  main {
-    font-family: "My Custom Font", sans-serif;
-  }
-
-  @font-face {
-    font-family: "navFont";
-    src: url("/Font/NEXT-Mono-Thin.otf") format("opentype");
-  }
-
-  .navFont {
-    font-family: "navFont", sans-serif;
-  }
-</style> -->
-
-<script>
-  import Router from "svelte-spa-router";
-  import routes from "./routes";
-  import Navbar from "./routes/Navbar.svelte";
-  import { location } from "svelte-spa-router";
-  import { fade } from "svelte/transition";
-  import { onMount } from "svelte";
-
-  let video;
-  let volume = 0.1;
   let muted = true;
   let paused = false;
 
@@ -333,9 +114,7 @@
     <source src={"./source_264.mp4"} type="video/mp4" />
   </video>
 
-  <!-- Fixed audio controls -->
   <div id="video-controls" class="z-20 fixed bottom-0 left-0 right-0 flex justify-between items-center p-4">
-    <!-- Left side - Mute and Volume controls -->
     <div class="flex items-center space-x-2">
       <button on:click={handleMute} class="opacity-40 hover:opacity-80 transition-opacity rounded-full p-2 bg-slate-500">
         {#if muted}
@@ -354,7 +133,6 @@
       <input class="w-24 md:w-32" type="range" min="0" max="1" step="0.01" value={volume} on:input={handleVolumeChange} />
     </div>
 
-    <!-- Right side - Play/Pause button -->
     <button on:click={handlePlay} class="opacity-40 hover:opacity-80 transition-opacity rounded-full p-2 bg-slate-500 {$location == '/' ? 'block' : 'hidden'}">
       {#if paused}
         <svg fill="#ffffff" class="w-5 h-5" viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -423,6 +201,277 @@
     main {
       max-width: none;
     }
+  }
+
+  @font-face {
+    font-family: "My Custom Font";
+    src: url("/Font/NHaasGroteskTXPro-65Md.otf") format("opentype");
+  }
+
+  main {
+    font-family: "My Custom Font", sans-serif;
+  }
+
+  @font-face {
+    font-family: "navFont";
+    src: url("/Font/NEXT-Mono-Thin.otf") format("opentype");
+  }
+
+  .navFont {
+    font-family: "navFont", sans-serif;
+  }
+</style> -->
+
+<script>
+  import Router from "svelte-spa-router";
+  import routes from "./routes";
+  import Navbar from "./routes/Navbar.svelte";
+  import { location } from "svelte-spa-router";
+  import { fade } from "svelte/transition";
+  import { onMount } from "svelte";
+
+  let video;
+  let volume = 0.1;
+  let muted = true;
+  let paused = false;
+
+  // Tracks the navbar's rendered height so the content layer
+  // can offset correctly without hardcoding any pixel values.
+  let navbarHeight = 0;
+
+  // Reference to the scrollable content layer so we can reset
+  // scroll position when the route changes.
+  let contentLayer;
+
+  onMount(() => {
+    if (video) {
+      video.volume = volume;
+      video.muted = true;
+      attemptPlay();
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  });
+
+  function attemptPlay() {
+    if (!video) return;
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          paused = false;
+        })
+        .catch((error) => {
+          console.log("Playback prevented:", error);
+          paused = true;
+        });
+    }
+  }
+
+  function handleVisibilityChange() {
+    if (!document.hidden && video && !paused) {
+      attemptPlay();
+    }
+  }
+
+  function handleMute() {
+    muted = !muted;
+    video.muted = muted;
+  }
+
+  function handlePlay() {
+    if (paused) {
+      attemptPlay();
+    } else {
+      video.pause();
+      paused = true;
+    }
+  }
+
+  function handleVolumeChange(event) {
+    volume = parseFloat(event.target.value);
+    video.volume = volume;
+
+    if (volume > 0 && muted) {
+      muted = false;
+      video.muted = false;
+    }
+  }
+
+  // On every route change: scroll page content back to top and
+  // resume video playback if it was running.
+  $: if ($location) {
+    if (contentLayer) contentLayer.scrollTop = 0;
+
+    if (video && !paused) {
+      setTimeout(() => {
+        if (video.paused) attemptPlay();
+      }, 100);
+    }
+  }
+</script>
+
+<!--
+  LAYOUT OVERVIEW
+  ═══════════════
+  The background video sits at z-index -1 at the root, behind everything.
+
+  Overlays (backdrop-blur + dark tint) are fixed at z-10.
+
+  The <main> element is fixed inset-0 at z-20. It is transparent, so
+  overlays show through it. Inside main:
+    • A single scrollable content layer (absolute, top = navbarHeight)
+      hosts the Router and all page components.
+    • Video controls sit at z-30 so they always float above page content.
+
+  The navbar wrapper is fixed at z-50, above the entire stack.
+
+  This layering makes it possible for page content (inside main's z-20
+  stacking context) to appear above the overlays (z-10 in root) while
+  the video (z-1 in root) stays beneath the overlays — without any
+  element needing to fight through another's stacking context.
+-->
+
+<!-- ① Fixed navbar — sits above everything; height is measured reactively -->
+<div class="navFont fixed top-0 left-0 right-0 z-50" bind:clientHeight={navbarHeight}>
+  <Navbar />
+</div>
+
+<!-- ② Frosted-glass overlays shown on every page except home -->
+{#if $location != "/"}
+  <div out:fade in:fade class="fixed inset-0 w-full h-full backdrop-blur-sm z-10" />
+  <div out:fade in:fade class="fixed inset-0 w-full h-full bg-black opacity-60 z-10" />
+{/if}
+
+<!-- ③ Main content container — transparent fixed layer above the overlays -->
+<main class="fixed inset-0 overflow-hidden z-20">
+  <!--
+    Scrollable content layer.
+    • absolute left/right/bottom = 0 pins it to all three edges of main.
+    • top is bound to the navbar's live height, so content always starts
+      exactly where the navbar ends — even when the hamburger menu opens.
+    • overflow-y-auto enables scrolling for pages whose content is taller
+      than the available space (About, Contact, Music on mobile).
+    • overflow-x-hidden prevents accidental horizontal scroll.
+    • Projects.svelte uses h-full + its own internal flex scroll so the
+      outer layer never scrolls for that page.
+  -->
+  <div class="absolute left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden" bind:this={contentLayer} style="top: {navbarHeight}px">
+    <Router {routes} />
+  </div>
+
+  <!-- ④ Audio / playback controls — z-30 keeps them above page content -->
+  <div id="video-controls" class="z-30 fixed bottom-0 left-0 right-0 flex justify-between items-center p-2 sm:p-4 bg-gradient-to-t from-black/50 to-transparent">
+    <!-- Mute toggle + volume slider -->
+    <div class="flex items-center space-x-1 sm:space-x-2">
+      <button on:click={handleMute} class="opacity-40 hover:opacity-80 transition-opacity rounded-full p-1.5 sm:p-2 bg-slate-500">
+        {#if muted}
+          <svg fill="#ffffff" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zM461.64 256l45.64-45.64c6.3-6.3 6.3-16.52 0-22.82l-22.82-22.82c-6.3-6.3-16.52-6.3-22.82 0L416 210.36l-45.64-45.64c-6.3-6.3-16.52-6.3-22.82 0l-22.82 22.82c-6.3 6.3-6.3 16.52 0 22.82L370.36 256l-45.63 45.63c-6.3 6.3-6.3 16.52 0 22.82l22.82 22.82c6.3 6.3 16.52 6.3 22.82 0L416 301.64l45.64 45.64c6.3 6.3 16.52 6.3 22.82 0l22.82-22.82c6.3-6.3 6.3-16.52 0-22.82L461.64 256z" />
+          </svg>
+        {:else}
+          <svg fill="#ffffff" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 -32 576 576" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95-7.34 11.17-4.22 26.18 6.95 33.51 66.27 43.49 105.82 116.6 105.82 195.58 0 78.98-39.55 152.09-105.82 195.58-11.17 7.32-14.29 22.34-6.95 33.5 7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z" />
+          </svg>
+        {/if}
+      </button>
+
+      <input class="w-16 sm:w-24 md:w-32" type="range" min="0" max="1" step="0.01" value={volume} on:input={handleVolumeChange} />
+    </div>
+
+    <!-- Play / pause — only visible on the home page -->
+    <button on:click={handlePlay} class="opacity-40 hover:opacity-80 transition-opacity rounded-full p-1.5 sm:p-2 bg-slate-500 {$location == '/' ? 'block' : 'hidden'}">
+      {#if paused}
+        <svg fill="#ffffff" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+        </svg>
+      {:else}
+        <svg fill="#ffffff" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="-32 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z" />
+        </svg>
+      {/if}
+    </button>
+  </div>
+</main>
+
+<!-- ⑤ Background video — lives at root level (z-index -1 in root stacking
+     context) so the overlays at z-10 correctly sit in front of it. -->
+<video
+  bind:this={video}
+  id="background-video"
+  playsinline
+  autoplay
+  loop
+  {muted}
+  on:canplay={() => {
+    if (!paused) attemptPlay();
+  }}
+  on:ended={() => {
+    video.currentTime = 0;
+    attemptPlay();
+  }}>
+  <track kind="captions" />
+  <source src={"./output_h265.mp4"} type="video/mp4;codec=hevc" />
+  <source src={"./source_vp9.webm"} type="video/webm;codec=vp9" />
+  <source src={"./source_264.mp4"} type="video/mp4" />
+</video>
+
+<style>
+  /* Prevent the body from scrolling — the video background must stay fixed
+     and all scrolling happens inside the content layer within <main>. */
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100dvh;
+    width: 100vw;
+  }
+
+  #background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  /* Custom range input */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: none;
   }
 
   @font-face {

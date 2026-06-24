@@ -2,124 +2,123 @@
   import { onMount } from "svelte";
   import { location } from "svelte-spa-router";
   import { fade } from "svelte/transition";
-  let navBarOpen = true;
+
+  let navBarOpen = false;
   let dropDownOpen = false;
-  let size = "";
+  let isReady = false;
+  let innerWidth = 0;
 
-  // function toggleNavbar() {
-  //   navBarOpen = !navBarOpen;
-  // }
-
-  // function toggleDropDown() {
-  //   dropDownOpen = !dropDownOpen;
-  // }
-
-  function unselect() {
-    // dropDownOpen = false;
-    navBarOpen = true;
+  function toggleMenu() {
+    navBarOpen = !navBarOpen;
   }
 
-  let isReady = false;
-  // let isHome = $location == "/" ? true : false;
+  function unselect() {
+    navBarOpen = false;
+  }
+
+  function handleResize() {
+    innerWidth = window.innerWidth;
+  }
 
   onMount(() => {
+    // Set initial width
+    innerWidth = window.innerWidth;
+
+    // Add resize listener
+    window.addEventListener("resize", handleResize);
+
+    // Initial load delay
     const delayInMilliseconds = 4000;
     setTimeout(() => {
       isReady = true;
     }, delayInMilliseconds);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   });
 </script>
 
 {#if isReady}
-  <nav in:fade={{ delay: 300 }} class=" flex flex-wrap items-center justify-between w-full py-4md:py-0 px-4 text-lg text-gray-700 relative z-50 pt-4">
-    <div>
-      <a href="#/">
-        <img class="h-auto" src={innerWidth > 1000 ? "/LOGO/Kerberos_and_Styx_Logo_Site.png" : "/LOGO/Kerberos_and_Styx_Logo_short_Website.png"} width={innerWidth > 1000 ? "400" : "100"} alt="logo" />
-      </a>
-    </div>
+  <nav in:fade={{ delay: 300 }} class="relative z-50 w-full px-2 sm:px-4 py-2 sm:py-4 text-gray-700">
+    <div class="flex flex-wrap items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center flex-shrink-0">
+        <a href="#/">
+          <img
+            class="h-auto"
+            src={innerWidth > 1000 ? "/LOGO/Kerberos_and_Styx_Logo_Site.png" : "/LOGO/Kerberos_and_Styx_Logo_short_Website.png"}
+            width={innerWidth > 1000 ? "400" : innerWidth > 640 ? "150" : "100"}
+            alt="logo" />
+        </a>
+      </div>
 
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" on:click={toggleNavbar} class="h-6 w-6 cursor-pointer md:hidden block text-white" fill="white" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-    </svg> -->
+      <!-- Hamburger Menu Button -->
+      <button
+        class="md:hidden text-white hover:text-[#b48a22] focus:outline-none focus:ring-2 focus:ring-[#b48a22] rounded p-2"
+        on:click={toggleMenu}
+        aria-label="Toggle navigation menu"
+        aria-expanded={navBarOpen}>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {#if navBarOpen}
+            <!-- X icon -->
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          {:else}
+            <!-- Hamburger icon -->
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          {/if}
+        </svg>
+      </button>
 
-    <div class=" transition ease-out duration-100 {navBarOpen ? 'hidden' : 'block'}  w-full md:flex md:items-center md:w-auto" id="menu">
-      <ul class="text-left pt-4 text-base md:flex md:justify-between md:pt-0">
-        <li class="">
-          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect} href="#/">Home</a>
-        </li>
-        <li class="">
-          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Music' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect} href="#/Music">Music</a>
-        </li>
-
-        <li class="">
-          <a class="hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Projects' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect} href="#/Projects">Projects</a>
-        </li>
-
-        <!-- <li class="">
-          <div class="hover:text-[#b48a22] relative inline-block">
-            <button class="md:p-4 py-2 active:scale-95 active: text-white flex" on:click={toggleDropDown}
-              >Projects
-
-              {#if dropDownOpen}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pt-1">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-              {:else}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pt-1">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                </svg>
-              {/if}
-            </button>
-            <div class="absolute {dropDownOpen ? 'block' : 'hidden'}  rounded-md {innerWidth > 760 ? '' : 'ml-32 -mt-10'}    ">
-              <a href="#/Film" class=" hover:text-[#b48a22] block px-4 py-1 {$location == '/Film' ? 'text-[#b48a00]' : 'text-white'} " on:click={unselect}>Film</a>
-              <a href="#/Commercial" class=" hover:text-[#b48a22] block px-4 py-1 {$location == '/Commercial' ? 'text-[#b48a00]' : 'text-white'} " on:click={unselect}>Commercial</a>
-            </div>
-          </div>
-        </li> -->
-
-        <!-- <li>
-        <div class="dropdown">
-          <button class="" on:click={toggleDropDown}>Projects</button>
-          <div class="dropdown-content">
-            <a href="#/Film" class="block py-2 text-gray-800 float-left active:scale-95"> Film </a>
-            <a href="#/Commercial" class="block py-2 text-gray-800 float-left active:scale-95"> Commercial </a>
-          </div>
-        </div>
-      </li> -->
-
-        <li class="">
-          <a href="#/About" class=" hover:text-[#b48a22] md:p-4 py-2 block {$location == '/About' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect}>About</a>
-        </li>
-        <li class="">
-          <a href="#/Contact" class=" hover:text-[#b48a22] md:p-4 py-2 block {$location == '/Contact' ? 'text-[#b48a00]' : 'text-white'} active:scale-95" on:click={unselect}>Contact</a>
-        </li>
-      </ul>
+      <!-- Navigation Menu -->
+      <div
+        class="transition-all duration-300 ease-in-out w-full md:w-auto {navBarOpen
+          ? 'block max-h-screen opacity-100'
+          : 'hidden max-h-0 opacity-0'} md:flex md:items-center md:max-h-screen md:opacity-100"
+        id="menu">
+        <ul class="pt-4 text-left text-sm sm:text-base md:flex md:justify-between md:pt-0 md:space-x-1 lg:space-x-2">
+          <li>
+            <a
+              class="hover:text-[#b48a22] md:p-2 lg:p-4 py-2 px-2 block {$location === '/' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 transition-colors duration-200"
+              on:click={unselect}
+              href="#/">
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              class="hover:text-[#b48a22] md:p-2 lg:p-4 py-2 px-2 block {$location === '/Music' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 transition-colors duration-200"
+              on:click={unselect}
+              href="#/Music">
+              Music
+            </a>
+          </li>
+          <li>
+            <a
+              class="hover:text-[#b48a22] md:p-2 lg:p-4 py-2 px-2 block {$location === '/Projects' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 transition-colors duration-200"
+              on:click={unselect}
+              href="#/Projects">
+              Projects
+            </a>
+          </li>
+          <li>
+            <a
+              href="#/About"
+              class="hover:text-[#b48a22] md:p-2 lg:p-4 py-2 px-2 block {$location === '/About' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 transition-colors duration-200"
+              on:click={unselect}>
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="#/Contact"
+              class="hover:text-[#b48a22] md:p-2 lg:p-4 py-2 px-2 block {$location === '/Contact' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 transition-colors duration-200"
+              on:click={unselect}>
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 {/if}
-
-<style>
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    min-width: 100px;
-    z-index: 1;
-  }
-
-  .dropdown:hover {
-    color: #b48a00;
-  }
-
-  .dropdown-content a {
-    display: block;
-  }
-
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-</style>
