@@ -109,14 +109,14 @@
               About
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a
               href="#/Contact"
               class="hover:text-[#b48a22] md:p-2 lg:p-4 py-2 px-2 block {$location === '/Contact' ? 'text-[#b48a00]' : 'text-white'} active:scale-95 transition-colors duration-200"
               on:click={unselect}>
               Contact
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
